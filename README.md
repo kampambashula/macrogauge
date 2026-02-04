@@ -102,4 +102,7 @@ MIT License — see [LICENSE](LICENSE) for details.
 ## Author
 
 **Kampamba Shula** — Economist & Developer
+
+---
+
 MacroGauge aims to be a **macro intelligence system** for Zambia, integrating fiscal, monetary, and commodity analytics with consistent branding for professional communication.
