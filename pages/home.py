@@ -66,7 +66,7 @@ def run():
     # ===============================
     # NAVIGATION (SESSION STATE)
     # ===============================
-    st.subheader("🧭 Explore the System")
+    st.subheader("🧭 Explore the System with Navigation bar - Left")
 
     col1, col2, col3 = st.columns(3)
 
