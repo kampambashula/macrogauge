@@ -23,7 +23,7 @@ It provides **real-time fiscal, monetary and commodity insights**, delivering in
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/yourusername/macrogauge.git
+git clone https://github.com/kampambashula/macrogauge.git
 cd macrogauge
 ```
 
