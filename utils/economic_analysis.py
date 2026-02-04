@@ -994,3 +994,68 @@ def summarize_commodities(df_comm: pd.DataFrame):
     fig.update_layout(height=400, margin=dict(l=20,r=20,t=40,b=40))
 
     return commentary, fig
+
+def classify_fx_pressure(df):
+    df = df.sort_values('Date')
+    mom_change = (df['USDZMW'].iloc[-1] / df['USDZMW'].iloc[-2] - 1) * 100
+
+    if mom_change < -1:
+        return "🟢 Improving", "Kwacha strengthened month-on-month."
+    elif abs(mom_change) <= 1:
+        return "⚠️ Moderate", "Kwacha broadly stable month-on-month."
+    else:
+        return "🔴 Deteriorating", "Kwacha weakened month-on-month."
+
+
+def classify_inflation_trend(df):
+    df = df.sort_values('Month')
+    mom = df['Inflation_Annual'].iloc[-1] - df['Inflation_Annual'].iloc[-2]
+
+    if mom < 0:
+        return "⬇️ Easing", "Inflation declined month-on-month."
+    elif mom == 0:
+        return "➖ Sticky", "Inflation unchanged month-on-month."
+    else:
+        return "⬆️ Rising", "Inflation increased month-on-month."
+
+
+def classify_yield_curve_simple(df_rates):
+    yc_comment, _, _ = analyze_yield_curve(df_rates)
+
+    if "upward sloping" in yc_comment.lower():
+        return "🟢 Normal", "Yield curve remains upward sloping."
+    elif "flat" in yc_comment.lower():
+        return "🟡 Flat", "Yield curve is relatively flat."
+    else:
+        return "🔴 Inverted", "Yield curve inversion signals downside risk."
+
+
+def classify_fiscal_stress_simple(df_bills):
+    df = df_bills.sort_values('Date')
+    mom_change = df['Total_Sales'].iloc[-1] - df['Total_Sales'].iloc[-2]
+
+    if mom_change < 0:
+        return "🟢 Contained", "Domestic issuance declined month-on-month."
+    elif mom_change > 0:
+        return "⚠️ Elevated", "Domestic issuance increased month-on-month."
+    else:
+        return "➖ Stable", "Fiscal financing broadly unchanged."
+
+
+def classify_commodity_pressure(df):
+    df = df.sort_values('Date')
+    copper_mom = df['Copper_US_Tonne'].iloc[-1] - df['Copper_US_Tonne'].iloc[-2]
+    maize_mom = df['Maize_K_50Kg'].iloc[-1] - df['Maize_K_50Kg'].iloc[-2]
+
+    notes = []
+    if copper_mom > 0:
+        notes.append("Copper prices strengthened, supporting external buffers.")
+    else:
+        notes.append("Copper prices softened, weighing on export earnings.")
+
+    if maize_mom > 0:
+        notes.append("Maize prices increased, adding food inflation pressure.")
+    else:
+        notes.append("Maize prices eased, reducing food inflation pressure.")
+
+    return "🟡 Mixed", " ".join(notes)

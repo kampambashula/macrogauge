@@ -2,6 +2,7 @@ import streamlit as st
 
 # --- Import all pages
 from pages import (
+    home,
     macro_snapshot,
     monetary_engine,
     external_sector,
@@ -11,9 +12,11 @@ from pages import (
     macro_brief_dashboard
 )
 
-# --- Sidebar Menu using Streamlit selectbox instead of option_menu
-st.sidebar.title("MacroGauge Pages")
+# --- Sidebar Navigation
+st.sidebar.title("🧭 MacroGauge")
+
 page_options = [
+    "Home",
     "Macro Snapshot",
     "Monetary Engine",
     "External Sector",
@@ -22,10 +25,18 @@ page_options = [
     "Macro Risk Indicator",
     "Macro Brief"
 ]
-selected_page = st.sidebar.selectbox("Select a Page", page_options)
+
+# Default loads Home (index=0)
+selected_page = st.sidebar.selectbox(
+    "Navigate",
+    page_options,
+    index=0
+)
 
 # --- Page Routing
-if selected_page == "Macro Snapshot":
+if selected_page == "Home":
+    home.run()
+elif selected_page == "Macro Snapshot":
     macro_snapshot.run()
 elif selected_page == "Monetary Engine":
     monetary_engine.run()
