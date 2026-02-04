@@ -1,0 +1,15 @@
+# Streamlit for dashboard
+streamlit>=1.24.1
+
+# Data handling
+pandas>=2.1.0
+numpy>=1.27.0
+
+# Plotting
+plotly>=5.21.0
+
+# PDF export
+fpdf>=1.7.2
+
+
+
