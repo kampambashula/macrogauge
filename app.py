@@ -9,7 +9,8 @@ from pages import (
     fiscal_dashboard,
     commodities_dashboard,
     macro_risk_monitor,
-    macro_brief_dashboard
+    macro_brief_dashboard,
+    inflation
 )
 
 # --- Sidebar Navigation
@@ -17,6 +18,7 @@ st.sidebar.title("🧭 MacroGauge")
 
 page_options = [
     "Home",
+    "Inflation",
     "Macro Snapshot",
     "Monetary Engine",
     "External Sector",
@@ -24,6 +26,7 @@ page_options = [
     "Commodities Dashboard",
     "Macro Risk Indicator",
     "Macro Brief"
+    
 ]
 
 # Default loads Home (index=0)
@@ -36,6 +39,8 @@ selected_page = st.sidebar.selectbox(
 # --- Page Routing
 if selected_page == "Home":
     home.run()
+elif selected_page == "Inflation":
+    inflation.run()
 elif selected_page == "Macro Snapshot":
     macro_snapshot.run()
 elif selected_page == "Monetary Engine":

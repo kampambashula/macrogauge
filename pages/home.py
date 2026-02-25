@@ -30,7 +30,7 @@ def run():
 
     latest_date = max(d for d in latest_dates if pd.notna(d))
 
-    st.markdown(f"📅 **Live Snapshot:** {latest_date.strftime('%B %Y')}")
+    st.markdown(f"📅 **Live Snapshot:** Februray 2026")
     st.divider()
 
     # ===============================
