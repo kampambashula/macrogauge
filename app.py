@@ -1,7 +1,7 @@
 import streamlit as st
 
 # --- Import all pages
-from pages import (
+from app_pages import (
     home,
     macro_snapshot,
     monetary_engine,
